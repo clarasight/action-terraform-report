@@ -50296,10 +50296,8 @@ async function stale (data) {
   } = context$1;
   const issue_number = data.prNumber;
 
-  // get issue comments
-  const {
-    data: results
-  } = await octokit.rest.issues.listComments({
+  // get all issue comments across pages
+  const results = await octokit.paginate(octokit.rest.issues.listComments, {
     ...repo,
     issue_number
   });
@@ -50315,11 +50313,10 @@ async function stale (data) {
     try {
       await octokit.rest.issues.deleteComment({
         ...repo,
-        issue_number,
         comment_id
       });
     } catch (error) {
-      warning(`Could not delete comment: ${comment_id}`);
+      warning(`Could not delete comment ${comment_id}: ${error.message}`);
     }
   }
 }
