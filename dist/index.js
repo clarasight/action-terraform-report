@@ -50317,7 +50317,7 @@ async function stale (data) {
         comment_id
       });
     } catch (error) {
-      warning(`Could not delete comment: ${comment_id}`);
+      warning(`Could not delete comment: ${comment_id}: ${error.message}`);
     }
   }
 }
