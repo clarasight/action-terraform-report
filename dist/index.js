@@ -50313,10 +50313,11 @@ async function stale (data) {
     try {
       await octokit.rest.issues.deleteComment({
         ...repo,
+        issue_number,
         comment_id
       });
     } catch (error) {
-      warning(`Could not delete comment ${comment_id}: ${error.message}`);
+      warning(`Could not delete comment: ${comment_id}`);
     }
   }
 }
