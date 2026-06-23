@@ -4,6 +4,5 @@
 
 *.log
 .nyc_output
-.tap
 coverage
 node_modules
